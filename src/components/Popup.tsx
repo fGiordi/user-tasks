@@ -1,23 +1,17 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import { useGlobalStore } from '../globals';
 
 interface Props {
   open: boolean,
   onClose: () => void,
   onOpen?: () => void,
+  action: () => void
 }
 
-export default function MyModal({ open, onClose }: Props) {
-  // const [isOpen, setIsOpen] = useState(true)
-
-  // function closeModal() {
-  //   setIsOpen(false)
-  // }
-
-  // function openModal() {
-  //   setIsOpen(true)
-  // }
-
+export default function MyModal({ open, onClose, action }: Props) {
+  // import global store username and email get and set
+  const { username, setUsername , setEmail, email} = useGlobalStore();
   return (
     <>
       <div className="fixed inset-0 flex items-center justify-center">
@@ -65,7 +59,7 @@ export default function MyModal({ open, onClose }: Props) {
                   </div>
 
                   <label
-                    htmlFor="FirstName"
+                    htmlFor="username"
                     className="block text-sm font-medium text-gray-700"
                   >
                     User Name
@@ -73,13 +67,14 @@ export default function MyModal({ open, onClose }: Props) {
 
                   <input
                     type="text"
-                    id="FirstName"
-                    name="first_name"
+                    id="username"
+                    name="username"
                     className="border mt-1 mb-2 w-full h-[40px] rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    onChange={(e) => setUsername(e.target.value)}
                   />
 
                   <label
-                    htmlFor="FirstName"
+                    htmlFor="email"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Email
@@ -87,16 +82,17 @@ export default function MyModal({ open, onClose }: Props) {
 
                   <input
                     type="text"
-                    id="FirstName"
-                    name="first_name"
+                    id="email"
+                    name="email"
                     className="border mt-1 w-full h-[40px] rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
 
                   <div className="mt-4">
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={onClose}
+                      onClick={action}
                     >
                       Add User
                     </button>

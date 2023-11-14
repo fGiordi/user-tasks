@@ -1,15 +1,8 @@
-
-// interface User {
-//   username: string
-//   email: string
-//   tasks: []
-// }
-
 import { User } from "../store"
 
 export default function UserCard({ username, email, tasks }: User) {
   return (
-    <article className="rounded-xl scrollbar-hide overflow-y-scroll border border-gray-700 bg-gray-800 p-4 max-h-[500px] overflow-hidden">
+    <article className="rounded-xl scrollbar-hide overflow-y-scroll border border-gray-700 bg-gray-800 p-4 max-h-[500px]  overflow-hidden">
       <div className="flex items-center gap-4">
         <img
           alt="Developer"
@@ -40,7 +33,7 @@ export default function UserCard({ username, email, tasks }: User) {
 
       <ul className="mt-4 space-y-2">
         <li>
-          {tasks.map((task) => {
+          {tasks?.map((task) => {
             return (
               <div
                 className="cursor-pointer block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600"
