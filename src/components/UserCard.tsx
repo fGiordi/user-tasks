@@ -1,6 +1,15 @@
-import { User } from "../store"
+import { useState } from "react"
+import { Task, User } from "../store"
+import MyModal from "./Popup"
 
 export default function UserCard({ username, email, tasks }: User) {
+  const [clickedTask, setClickedTask] = useState(false)
+  const [selectedTask, setSelectedTask] = useState<Task | null>()
+
+  const onClose = () => {
+    setClickedTask(false)
+  }
+  
   return (
     <article className="rounded-xl scrollbar-hide overflow-y-scroll border border-gray-700 bg-gray-800 p-4 max-h-[500px]  overflow-hidden">
       <div className="flex items-center gap-4">
@@ -34,9 +43,14 @@ export default function UserCard({ username, email, tasks }: User) {
       <ul className="mt-4 space-y-2">
         <li>
           {tasks?.map((task) => {
+            const isCheck = task.completed 
             return (
               <div
-                className="cursor-pointer block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600"
+                onClick={() => {
+                  setClickedTask(true)
+                  setSelectedTask(task)
+                }}
+                className={`cursor-pointer block h-full rounded-lg border ${isCheck ? 'border-green-400' : 'border-gray-700 '} p-4 hover:border-pink-600`}
               >
                 <div className="flex justify-between">
                   <div>
@@ -45,13 +59,14 @@ export default function UserCard({ username, email, tasks }: User) {
                     {task.description}
                   </p>
                   </div>
-                  <input type="checkbox" className="h-6 w-6 text-indigo-600 rounded-md" checked={task.completed} />
+                  <input type="checkbox" className="h-6 w-6 text-indigo-600 rounded-md" checked={isCheck} />
                 </div>
               </div>
             )
           })}
         </li>
       </ul>
+      <MyModal open={clickedTask} onClose={onClose} type="edit" action={() => null} />
     </article>
   )
 }

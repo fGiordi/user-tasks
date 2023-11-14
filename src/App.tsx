@@ -5,18 +5,14 @@ import UserCard from "./components/UserCard";
 import { useGlobalStore } from "./globals";
  
 export default function TodoList(): JSX.Element {
-
   const { users, fetchTasksAndUsers, registerUser } = useGraphQLStore();
-
   const {email, username} = useGlobalStore();
-
 
   useEffect(() => {
     fetchTasksAndUsers();
   }, []);
 
-  const [isOpen, setIsOpen] = useState(true)
-
+  const [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
     setIsOpen(false)

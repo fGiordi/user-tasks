@@ -7,11 +7,12 @@ interface Props {
   onClose: () => void,
   onOpen?: () => void,
   action: () => void
+  type: 'edit' | 'add'
 }
 
-export default function MyModal({ open, onClose, action }: Props) {
+export default function MyModal({ open, onClose, action, type = 'add' }: Props) {
   // import global store username and email get and set
-  const { username, setUsername , setEmail, email} = useGlobalStore();
+  const { username, setUsername, setEmail, email } = useGlobalStore();
   return (
     <>
       <div className="fixed inset-0 flex items-center justify-center">
@@ -50,53 +51,92 @@ export default function MyModal({ open, onClose, action }: Props) {
                   >
                     User Details
                   </Dialog.Title>
-                  <div className="mt-2">
 
-                    <p className="text-sm text-gray-500">
-                      Please enter the user details below
-                    </p>
+                  {type === 'add' ? (
+                    <div>
+                      <div className="mt-2">
 
-                  </div>
+                        <p className="text-sm text-gray-500">
+                          Please enter the user details below
+                        </p>
 
-                  <label
-                    htmlFor="username"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    User Name
-                  </label>
+                      </div>
 
-                  <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    className="border mt-1 mb-2 w-full h-[40px] rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
+                      <label
+                        htmlFor="username"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        User Name
+                      </label>
 
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Email
-                  </label>
+                      <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        className="border mt-1 mb-2 w-full h-[40px] rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
 
-                  <input
-                    type="text"
-                    id="email"
-                    name="email"
-                    className="border mt-1 w-full h-[40px] rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Email
+                      </label>
 
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={action}
-                    >
-                      Add User
-                    </button>
-                  </div>
+                      <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        className="border mt-1 w-full h-[40px] rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+
+                      <div className="mt-4">
+                        <button
+                          type="button"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                          onClick={action}
+                        >
+                          Add User
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Title
+                      </label>
+
+                      <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        className="border mt-1 w-full h-[40px] rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                        onChange={(e) => setEmail(e.target.value)}
+                        defaultValue={""}
+                      />
+                       <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Description
+                      </label>
+
+                      <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        className="border mt-1 w-full h-[40px] rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                        onChange={(e) => setEmail(e.target.value)}
+                        defaultValue={""}
+                      />
+                    </div>
+                  )}
+
                 </Dialog.Panel>
               </Transition.Child>
             </div>
