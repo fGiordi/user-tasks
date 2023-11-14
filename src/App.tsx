@@ -40,7 +40,7 @@ export default function TodoList(): JSX.Element {
         </button>
         
       </div>
-      {isOpen  && <MyModal open={isOpen} onClose={closeModal} onOpen={openModal} action={handleRegisterUser} />}
+      {isOpen  && <MyModal open={isOpen} onClose={closeModal} onOpen={openModal} action={handleRegisterUser} type="add" />}
 
       <div className="px-10 flex flex-col md:grid md:grid-cols-3 max-w-[1200px] gap-10 mt-10">
        {users?.map((user) => <UserCard id={user.id} key={user.id} username={user.username} email={user.email} tasks={user.tasks} />)}

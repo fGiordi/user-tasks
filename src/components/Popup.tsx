@@ -12,7 +12,7 @@ interface Props {
 
 export default function MyModal({ open, onClose, action, type = 'add' }: Props) {
   // import global store username and email get and set
-  const { username, setUsername, setEmail, email } = useGlobalStore();
+  const {  setUsername, setEmail} = useGlobalStore();
   return (
     <>
       <div className="fixed inset-0 flex items-center justify-center">

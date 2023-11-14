@@ -6,10 +6,12 @@ export default function UserCard({ username, email, tasks }: User) {
   const [clickedTask, setClickedTask] = useState(false)
   const [selectedTask, setSelectedTask] = useState<Task | null>()
 
+  console.log(selectedTask)
+
   const onClose = () => {
     setClickedTask(false)
   }
-  
+
   return (
     <article className="rounded-xl scrollbar-hide overflow-y-scroll border border-gray-700 bg-gray-800 p-4 max-h-[500px]  overflow-hidden">
       <div className="flex items-center gap-4">
