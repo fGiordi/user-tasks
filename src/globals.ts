@@ -1,5 +1,4 @@
 import {create} from 'zustand';
-import axios from 'axios';
 
 // create a global store with username and email state and setter
 interface GlobalStore {
