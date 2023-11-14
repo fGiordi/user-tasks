@@ -1,21 +1,21 @@
 import {  useState, useEffect,  } from "react";
 import { useGraphQLStore } from "./store";
 import MyModal from "./components/Popup";
- 
-
+import UserCard from "./components/UserCard";
  
 export default function TodoList(): JSX.Element {
 
-  const { tasks, users, fetchTasksAndUsers } = useGraphQLStore();
+  const { users, fetchTasksAndUsers } = useGraphQLStore();
 
   useEffect(() => {
-    // fetchTasksAndUsers();
+    fetchTasksAndUsers();
   }, []);
+
+  console.log('users', users)
 
 
   const [isOpen, setIsOpen] = useState(true)
 
-  console.log('isOpen', isOpen)
 
   function closeModal() {
     setIsOpen(false)
@@ -26,7 +26,7 @@ export default function TodoList(): JSX.Element {
   }
  
   return (
-    <div className="min-h-screen relative z-100">
+    <div className="min-h-full relative z-100">
 
       <div className="flex items-center flex-col ">
       <h2 className="text-[60px] text-indigo-500 text-center my-10">Task Manager Application</h2>
@@ -40,7 +40,10 @@ export default function TodoList(): JSX.Element {
         
       </div>
       {isOpen  && <MyModal open={isOpen} onClose={closeModal} onOpen={openModal} />}
-      
+
+      <div className="flex flex-col md:grid md:grid-cols-3 max-w-[1200px] gap-10 mt-10">
+       {users?.map((user) => <UserCard key={user.id} username={user.username} email={user.email} tasks={[]} />)}
+      </div>      
 
     </div>
   );
