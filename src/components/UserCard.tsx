@@ -1,4 +1,3 @@
-import React from 'react'
 
 interface User {
  username: string
@@ -6,7 +5,7 @@ interface User {
   tasks: []
 }
 
-export default function UserCard({username, email, tasks}: User) {
+export default function UserCard({username, email}: User) {
   return (
     <article className="rounded-xl border border-gray-700 bg-gray-800 p-4">
       <div className="flex items-center gap-4">
