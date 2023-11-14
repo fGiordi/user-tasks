@@ -1,14 +1,15 @@
 import {create} from 'zustand';
 import axios from 'axios';
 
-interface Task {
+export interface Task {
   id: string;
   title: string;
   description: string;
   completed: boolean;
 }
 
-interface User {
+export interface User {
+  tasks: Task[];
   id: string;
   username: string;
   email: string;
@@ -27,7 +28,7 @@ export const useGraphQLStore = create<GraphQLStore>((set) => ({
   fetchTasksAndUsers: async () => {
     try {
       const response = await axios.post(
-        'https://p3xyeb9kt4.execute-api.eu-north-1.amazonaws.com/prod',
+        'https://6mjxzacvwc.execute-api.us-east-1.amazonaws.com/',
         {
           query: `
             query ExampleQuery {
@@ -66,7 +67,7 @@ export const useGraphQLStore = create<GraphQLStore>((set) => ({
   registerUser: async (username: string, email: string) => {
     try {
       const response = await axios.post(
-        'https://p3xyeb9kt4.execute-api.eu-north-1.amazonaws.com/prod',
+        'https://6mjxzacvwc.execute-api.us-east-1.amazonaws.com/',
         {
           query: `
             mutation RegisterUser($username: String!, $email: String!) {

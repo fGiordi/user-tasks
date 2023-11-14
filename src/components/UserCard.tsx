@@ -1,17 +1,20 @@
 
-interface User {
- username: string
-  email: string
-  tasks: []
-}
+// interface User {
+//   username: string
+//   email: string
+//   tasks: []
+// }
 
-export default function UserCard({username, email}: User) {
+import { User } from "../store"
+
+export default function UserCard({ username, email, tasks }: User) {
   return (
-    <article className="rounded-xl border border-gray-700 bg-gray-800 p-4">
+    <article className="rounded-xl scrollbar-hide overflow-y-scroll border border-gray-700 bg-gray-800 p-4 max-h-[500px] overflow-hidden">
       <div className="flex items-center gap-4">
         <img
           alt="Developer"
-          src="https://images.unsplash.com/photo-1614644147724-2d4785d69962?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+          src={`https://ui-avatars.com/api/?name=${username[0]}`}
+          // src="https://images.unsplash.com/photo-1614644147724-2d4785d69962?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
           className="h-16 w-16 rounded-full object-cover"
         />
 
@@ -37,31 +40,23 @@ export default function UserCard({username, email}: User) {
 
       <ul className="mt-4 space-y-2">
         <li>
-          <a
-            href="#"
-            className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600"
-          >
-            <strong className="font-medium text-white">Project A</strong>
-
-            <p className="mt-1 text-xs font-medium text-gray-300">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-              consequuntur deleniti, unde ab ut in!
-            </p>
-          </a>
-        </li>
-
-        <li>
-          <a
-            href="#"
-            className="block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600"
-          >
-            <strong className="font-medium text-white">Project B</strong>
-
-            <p className="mt-1 text-xs font-medium text-gray-300">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-              cumque saepe sit.
-            </p>
-          </a>
+          {tasks.map((task) => {
+            return (
+              <div
+                className="cursor-pointer block h-full rounded-lg border border-gray-700 p-4 hover:border-pink-600"
+              >
+                <div className="flex justify-between">
+                  <div>
+                  <strong className="font-medium text-white">{task.title}</strong>
+                  <p className="mt-1 text-xs font-medium text-gray-300">
+                    {task.description}
+                  </p>
+                  </div>
+                  <input type="checkbox" className="h-6 w-6 text-indigo-600 rounded-md" checked={task.completed} />
+                </div>
+              </div>
+            )
+          })}
         </li>
       </ul>
     </article>
